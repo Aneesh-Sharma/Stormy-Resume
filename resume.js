@@ -5,26 +5,34 @@ var text;
 var direction="left";
 var hero;
 var cursors;
-var base7 =19500+1400;
+var base7 =16923;
 var platformLength = base7+2000;
 var delay =0;
 var cloud;
+var evil,fight,evilTween;
 var intro;
+var inst_text;
 var level;
 var stone;
 var hospital;
 var rocket12,rocket10,platform,spaceShip;
 var bird1,bird2,bird3;
 var tnt,tntPress=false;
+var evil_killed=false;
+var mushroom,isBig=true;
+var moving_coin,moving_coin1,moving_coin2,moving_coin3;
 var box,box2,box3,box4,box5,box6,box7,box8;
 var boom,boom2,boom3,boom4,boom5,boom6,boom7,boom8;
 var cpp,android,react,html,css,js,python,spring;
 var starting_point=150;
+var owlChatter_url="https://owlchatter.ml";
+var burger_url="https://aneeshburger.tk";
+var maths_url="https://www.youtube.com/channel/UCk2LItw7-RzhihHWlMW8agg";
 var game = new Phaser.Game(w,h,Phaser.CANVAS,'canvas',{preload:preload,create:create,update:update,render:render});
 
 function preload(){
 
-	text = game.add.text(w/2, h/2, "Loading...",{ font:"80px Roboto",fill: '#ffffff' });
+	text = game.add.text(w/2, h/2, "                    Loading...\n\n Best view in Landscape Mode",{ font:"80px Roboto",fill: '#ffffff' });
 	text.anchor.setTo(0.5,0.5);
 	game.load.image('ground','assets/ground.jpg');
 	game.load.image('grass','assets/grass.png');
@@ -77,6 +85,25 @@ function preload(){
 	game.load.image('mill','assets/mill.png');
 	game.load.image('farmtree','assets/farmtree.png');
 	game.load.image('haypile','assets/haypile.png');
+	game.load.image('evil','assets/evil.png');
+	game.load.image('fight','assets/fight.png');
+	//game.load.image('sheep','assets/sheep.png');
+	game.load.image('cow','assets/cow.png');
+	//game.load.image('elephant','assets/elephant.png');
+	game.load.atlasJSONHash('coin_moving','assets/coin-sprite.png','assets/coin-sprite-map.json');
+	game.load.image('alexa','assets/alexaIntern.png');
+	game.load.image('maths','assets/maths.png');
+	game.load.image('owlChatter','assets/owlChatter.png');
+	game.load.image('play','assets/play.png');
+	game.load.image('burger','assets/burger.png');
+	game.load.image('chatTracker','assets/chatTracker.png');
+	game.load.image('clone','assets/clone.png');
+	game.load.image('mathsAnxiety','assets/mathsAnxiety.png');
+	game.load.image('cook','assets/cook.png');
+	game.load.image('tv','assets/tv.png');
+	game.load.image('mushroom','assets/mushroom.png');
+	game.load.image('pipe','assets/pipe.png');
+	game.load.image('thanx','assets/thanx.png');
 }
 
 function create(){
@@ -145,6 +172,18 @@ function create(){
 	stone = game.add.sprite(8900,h-100-105,'stone');
 	stone.scale.setTo(0.4,0.4);
 
+	level=game.add.sprite(10900,h-350,'level');
+	game.add.text(10950,h-340,"Level 4",{font:"25px Arial Black",fill:"#efe4b0"});
+	game.add.text(10930,h-270,"Projects > >",{fill:" #efe4b0"});
+	stone = game.add.sprite(10900,h-100-105,'stone');
+	stone.scale.setTo(0.4,0.4);
+
+	level=game.add.sprite(15300+60,h-350,'level');
+	game.add.text(15350+60,h-340,"Level 5",{font:"25px Arial Black",fill:"#efe4b0"});
+	game.add.text(15310+60,h-295,"      Some\n   Highlights",{fill:" #efe4b0"});
+	stone = game.add.sprite(15300+60,h-100-105,'stone');
+	stone.scale.setTo(0.4,0.4);
+
 	//level 1
 	var baby = game.add.sprite(2177,h-340,'baby');
 	baby.scale.setTo(0.2,0.2);
@@ -173,6 +212,32 @@ function create(){
 	
 	//level 2
 
+	cow=game.add.sprite(0+7300,h-305,'cow');
+	cow.scale.setTo(0.7,0.7);
+	cow=game.add.sprite(200+7300,h-275,'cow');
+	cow.scale.setTo(0.6,0.6);
+	// sheep=game.add.sprite(1180+7300,h-300,'sheep');
+	// sheep.scale.setTo(0.3,0.3);
+	// elephant=game.add.sprite(550+7300,h-450,'elephant');
+	// elephant.scale.setTo(0.5,0.5);
+
+	fence=game.add.sprite(9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(220+9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(440+9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(660+9099-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(880+9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(880+220+9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(880+440+9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	fence=game.add.sprite(880+660+9100-2000,h-305,'fence');
+	fence.scale.setTo(0.4,0.4);
+	
 	cpp=game.add.sprite(7210,h-100,'cpp');
 	cpp.scale.setTo(0.175,0.175);
 	box=game.add.sprite(7160,h-279,'box');
@@ -236,7 +301,7 @@ function create(){
 	farmtree.scale.setTo(1.2,1.2);
 	var haypile=game.add.sprite(550+9400,h-207,'haypile');
 	haypile.scale.setTo(0.1,0.1);
-
+	
 	var fence=game.add.sprite(9100,h-305,'fence');
 	fence.scale.setTo(0.4,0.4);
 	fence=game.add.sprite(220+9100,h-305,'fence');
@@ -254,11 +319,46 @@ function create(){
 	fence=game.add.sprite(880+660+9100,h-305,'fence');
 	fence.scale.setTo(0.4,0.4);
 
+	//level 4
+	var maths=game.add.sprite(11200,h-332,'maths');
+	maths.scale.setTo(1,1);
+	game.add.text(11200,h-379,"         Developed Website for \nMathematics Department of DTU",{font:"25px Arial Black",fill:"white"});
+	var alexa=game.add.sprite(11900,h-435,'alexa');
+	alexa.scale.setTo(0.7,0.7);
+	var owlChatter=game.add.sprite(500+12200,h-450,'owlChatter');
+	owlChatter.scale.setTo(0.5,0.5);
+	var button_owl = game.add.button(850+12200,h-390,'play',openOwlChatter, this);
+	button_owl.scale.setTo(0.15,0.15);
+	var burger=game.add.sprite(400+13000,h-480,'burger');
+	burger.scale.setTo(0.7,0.7);
+	var button_burger = game.add.button(750+13000,h-390,'play',openBurger, this);
+	button_burger.scale.setTo(0.15,0.15);
+	var chatTracker=game.add.sprite(400+13700,h-480,'chatTracker');
+	chatTracker.scale.setTo(0.76,0.76);
+	var clone=game.add.sprite(400+14300,h-430,'clone');
+	clone.scale.setTo(0.76,0.76);
+
+	//level 5
+	var mathsAnxiety=game.add.sprite(15700,h-420,'mathsAnxiety');
+	mathsAnxiety.scale.setTo(0.76,0.76);
+	var button_maths = game.add.button(15844,h-438,'play',openMaths, this);
+	button_maths.scale.setTo(0.15,0.15);
+	var cook=game.add.sprite(16770,h-511,'cook');
+	cook.scale.setTo(0.82,0.82);
+	var tv=game.add.sprite(17310,h-477,'tv');
+	tv.scale.setTo(0.65,0.65);
+	
+
 	//adding grass ground and sky
 	game.stage.backgroundColor =bgColor;
 	game.world.setBounds(0, 0,platformLength,h+800);
 	var grass2 = game.add.tileSprite(0,h-150,platformLength*2,250,'grass2');
 	grass2.scale.setTo(0.4,0.4);
+	evil=game.add.sprite(9650,h-363,'evil');
+	evil.scale.setTo(0.9,0.9);
+	game.physics.arcade.enable(evil);
+	evilTween=game.add.tween(evil).to( { x:9600}, 2000, Phaser.Easing.Quadratic.InOut, true, 0, 2000, true);
+
 	var ground = game.add.tileSprite(0,h-100,platformLength*2,2000,'ground');
 	ground.scale.setTo(0.5,0.5);
 	var grass = game.add.tileSprite(0,h-100,platformLength*2,50,'grass');
@@ -303,7 +403,30 @@ function create(){
     game.add.text(470+9900,h-205,"June-July 2018",{font:"20px Arial",fill:"red"});
     game.add.text(440+9900,h-185,"\nSoftware Developer \n            Intern",{font:"20px Arial black",fill:"red"});
 
+    //level 4
+    moving_coin = game.add.sprite(610+10100,h-165,'coin_moving');
+    moving_coin.scale.setTo(2,2);
+    moving_coin.animations.add('run');
+    moving_coin.animations.play('run',20,true);
 
+    moving_coin1 = game.add.sprite(530+10100,h-165,'coin_moving');
+    moving_coin1.scale.setTo(2,2);
+    moving_coin1.animations.add('run');
+    moving_coin1.animations.play('run',20,true);
+
+    moving_coin2 = game.add.sprite(690+10100,h-165,'coin_moving');
+    moving_coin2.scale.setTo(2,2);
+    moving_coin2.animations.add('run');
+    moving_coin2.animations.play('run',20,true);
+
+    moving_coin3 = game.add.sprite(770+10100,h-165,'coin_moving');
+    moving_coin3.scale.setTo(2,2);
+    moving_coin3.animations.add('run');
+    moving_coin3.animations.play('run',20,true);
+
+    //level 5
+
+    inst_text = game.add.text(290,h-50,"       Use  Arrow Keys  OR << Screen Buttons >> ",{font:"30px Arial black",fill:"white"});
 	//add hero
 	hero = game.add.sprite(100,-200,'aneesh');
 	hero.animations.add('run');
@@ -320,11 +443,23 @@ function create(){
     tnt=game.add.sprite(7900,h-214,'tnto');
     tnt.scale.setTo(0.25,0.25);
 
+    fight=game.add.sprite(400,h-580,'fight');
+    fight.scale.setTo(0,0);
+    game.physics.arcade.enable(fight);
+
     cursors = game.input.keyboard.createCursorKeys();
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.enable(hero);
     game.camera.follow(hero);
     game.camera.follow(hero,Phaser.Camera.FOLLOW_PLATFORMER);
+
+    //thanx
+    mushroom=game.add.sprite(760+17010,h-207,'mushroom');
+    mushroom.scale.setTo(0.45,0.45);
+    var pipe=game.add.sprite(310+17810,h-247,'pipe');
+    pipe.scale.setTo(0.55,0.45);
+    var thanx=game.add.sprite(650+17810,h-607,'thanx');
+    thanx.scale.setTo(0.7,0.7);
 
     //add buttons
     back_btn = game.add.button(10,h-94,'back');
@@ -353,6 +488,7 @@ function update(){
 	}
 
 	if(forwardButtonPressed()){
+		inst_text.setText("");
 		hero.x +=25;
 	}
 	else if(backButtonPressed()){
@@ -364,9 +500,78 @@ function update(){
 	if(hero.x <=150&&direction=="left"){
 		hero.x = 150;
 	}
+
+	if(hero.x >=640+17810){
+		hero.x = 640+17810;
+	}
+
+	zombieFight();
+	collectCoin();
+	eatMushroom();
 }
 
 function render(){
+	
+	
+}
+
+function eatMushroom(){
+	if(isBig&&mushroom.x-hero.x<50){
+		mushroom.destroy();
+		isBig=false;
+		hero.scale.setTo(0.6,0.6);
+		hero.reset(hero.x,h-227);
+	}
+}
+
+function openMaths(){
+	var win = window.open(maths_url);
+	win.focus();
+}
+
+function openOwlChatter(){
+	var win = window.open(owlChatter_url);
+	win.focus();
+}
+
+function openBurger(){
+	var win = window.open(burger_url);
+	win.focus();
+}
+
+function collectCoin(){
+	if(moving_coin.x-hero.x<50){
+		moving_coin.scale.setTo(0,0);
+	}
+	if(moving_coin2.x-hero.x<50){
+		moving_coin2.scale.setTo(0,0);
+	}
+	if(moving_coin3.x-hero.x<50){
+		moving_coin3.scale.setTo(0,0);
+	}
+	if(moving_coin1.x-hero.x<50){
+		moving_coin1.scale.setTo(0,0);
+	}
+}
+
+function zombieFight(){
+	if(Math.abs(evil.x - hero.x)<=100&&!evil_killed){
+		evil.body.velocity.x = 0;
+
+		evil.scale.setTo(1,-1);
+		evil.body.y = h+30;
+
+		fight.scale.setTo(0.4,0.4);
+		fight.body.x = evil.x-160;
+		evilTween.stop();
+		if(evil_killed==false){
+			hero.x+=60;
+			evil_killed =true;
+		}
+	}
+	if(Math.abs(evil.x - hero.x)>100&&evil_killed){
+		fight.scale.setTo(0,0);
+	}
 	
 	
 }
@@ -486,7 +691,12 @@ function forwardButtonPressed(){
 	{
 		if(direction =="left"){
 			direction= "right";
-			hero.scale.setTo(1,1);	
+			if(isBig){
+				hero.scale.setTo(1,1);	
+			}else{
+				hero.scale.setTo(0.6,0.6);		
+			}
+			
 		}
 		return true;
 	}
@@ -504,7 +714,12 @@ function backButtonPressed(){
 	{
 		if(direction =="right"){
 			direction= "left";
-			hero.scale.setTo(-1,1);
+			if(isBig){
+				hero.scale.setTo(-1,1);
+			}else{
+				hero.scale.setTo(-0.6,0.6);
+			}
+			
 		}
 		return true;
 	}
