@@ -1,0 +1,93 @@
+{
+	
+			"frames": [
+				{
+					"filename": "0001_burned.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 146,
+						"h": 243
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 10,
+						"w": 136,
+						"h": 223
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 136,
+						"h": 223
+					},
+					"anchor": {
+						"x": 0.43150685,
+						"y": 0.9382716
+					}
+				},
+				{
+					"filename": "0003_burned.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 180,
+						"h": 259
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 22,
+						"w": 170,
+						"h": 219
+					},
+					"frame": {
+						"x": 139,
+						"y": 1,
+						"w": 170,
+						"h": 219
+					},
+					"anchor": {
+						"x": 0.48888889,
+						"y": 0.93050193
+					}
+				},
+				{
+					"filename": "0002_burned.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 163,
+						"h": 233
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 9,
+						"w": 151,
+						"h": 215
+					},
+					"frame": {
+						"x": 311,
+						"y": 1,
+						"w": 151,
+						"h": 215
+					},
+					"anchor": {
+						"x": 0.47852761,
+						"y": 0.92703863
+					}
+				}
+			]
+		,
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"image": "man.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 463,
+				"h": 225
+			},
+			"scale": 1,
+		"smartupdate": "$TexturePacker:SmartUpdate:3e3e4bb4af43bea645eb1a44359cb5ed:db9dfd2e0ca30475bcf0c433ee70de08:7cb16ae2a7812a83bde2d0f7d63f713f$"
+	}
+}

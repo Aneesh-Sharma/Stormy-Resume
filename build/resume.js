@@ -32,7 +32,7 @@ var game = new Phaser.Game(w,h,Phaser.CANVAS,'canvas',{preload:preload,create:cr
 
 function preload(){
 
-	text = game.add.text(w/2, h/2, "                    Loading...\n\n Best view in Landscape Mode",{ font:"60px Roboto",fill: '#ffffff' });
+	text = game.add.text(w/2, h/2, "                    Loading...\n\n  It takes some time to Load",{ font:"60px Roboto",fill: '#ffffff' });
 	text.anchor.setTo(0.5,0.5);
 	game.load.image('ground','assets/ground.jpg');
 	game.load.image('grass','assets/grass.png');
@@ -51,7 +51,7 @@ function preload(){
 	game.load.image('hometown','assets/hometown.png');
 	game.load.image('table','assets/table.png');
 	game.load.image('school','assets/school.png');
-	game.load.image('schoolRoom','assets/classRoom.png');
+	game.load.image('schoolRoom','assets/classroom.png');
 	game.load.image('teacher','assets/teacher1.png');
 	game.load.image('rocket12','assets/rocket1.png');
 	game.load.image('rocket10','assets/rocket10.png');
@@ -77,7 +77,7 @@ function preload(){
 	game.load.image('spring','assets/spring.png');
 	game.load.spritesheet('explode', 'assets/explode.png', 128, 128);
 	game.load.image('chicken','assets/chicken.png');
-	game.load.image('woodenboard','assets/woodenboard.png');
+	game.load.image('woodenboard','assets/woodenBoard.png');
 	game.load.image('amazon','assets/amazon.png');
 	game.load.image('dtuLogo','assets/dtuLogo.png');
 	game.load.image('fence','assets/fence.png');
@@ -393,8 +393,8 @@ function create(){
     game.add.text(480+8850,h-205,"June-July 2017",{font:"20px Arial",fill:"red"});
     game.add.text(440+8850,h-185,"\n     Web Developer \n            Intern",{font:"20px Arial black",fill:"red"});
 
-    var woodenboard=game.add.sprite(9900+400,h-360,'woodenboard');
-    woodenboard.scale.setTo(0.5,0.6);
+    var woodenboard1=game.add.sprite(9900+400,h-360,'woodenboard');
+    woodenboard1.scale.setTo(0.5,0.6);
     var chicken=game.add.sprite(9900+400,h-600,'chicken');
     chicken.scale.setTo(0.5,0.5);
     var amazon=game.add.sprite(350+9900,h-337,'amazon');
@@ -427,6 +427,8 @@ function create(){
     //level 5
 
     inst_text = game.add.text(290,h-50,"       Use  Arrow Keys  OR << Screen Buttons >> ",{font:"30px Arial black",fill:"white"});
+	var play_text = game.add.text(500+12200,h-50,"Click Play button to check Out",{font:"30px Arial black",fill:"white"});
+	
 	//add hero
 	hero = game.add.sprite(100,-200,'aneesh');
 	hero.animations.add('run');
@@ -555,7 +557,7 @@ function collectCoin(){
 }
 
 function zombieFight(){
-	if(Math.abs(evil.x - hero.x)<=100&&!evil_killed){
+	if(Math.abs(evil.x - hero.x)<=10&&!evil_killed){
 		evil.body.velocity.x = 0;
 
 		evil.scale.setTo(1,-1);
